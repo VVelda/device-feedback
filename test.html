@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, target-densitydpi=device-dpi" />
+	<title>DeviceFeedback sample</title>
+	<script type="text/javascript" src="cordova.js"></script>
+	<style type="text/css">
+		* {
+			-webkit-tap-highlight-color: rgba(0,0,0,0)
+		} html, body {
+			background-color:white;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			-webkit-touch-callout: none;
+			-webkit-text-size-adjust: none;
+			-webkit-user-select: none
+		} button {
+			font-size: 1em
+		} #vibration-rectangle {
+			height: 10em;
+			background-color: gray
+		}
+	</style>
+	<script>
+		function isFeedbackEnabledCallback(feedback) {
+			if(feedback.haptic && feedback.acoustic) alert("Both haptic and acoustic feedback are enabled by user.")
+			else if(feedback.haptic) alert("Haptic feedback is enabled, but acoustic not.")
+			else if(feedback.acoustic) alert("Haptic feedback is disabled, nevertheless acoustic is enabled.")
+			else alert("Neither haptic feedback is enabled nor acoustic.")
+		}
+		function performFeedback() {
+			window.plugins.deviceFeedback.isFeedbackEnabled(function(feedback) {
+				if(feedback.acoustic) window.plugins.deviceFeedback.acoustic()
+				else window.plugins.deviceFeedback.haptic()
+			})
+		}
+	</script>
+</head>
+<body>
+	<h2>DeviceFeedback sample</h2>
+	<p>
+		<button ontouchstart="window.plugins.deviceFeedback.haptic()" ontouchend="window.plugins.deviceFeedback.acoustic()">Vibrate on touch, sound on release</button>
+		<button ontouchend="window.plugins.deviceFeedback.acoustic()">Only sound</button>
+	</p>
+	<p>
+		<button ontouchend="window.plugins.deviceFeedback.haptic(window.plugins.deviceFeedback.VIRTUAL_KEY)">Vibrate as virtual key</button>
+		<button ontouchend="window.plugins.deviceFeedback.haptic(window.plugins.deviceFeedback.LONG_PRESS)">Vibrate as long press</button>
+		<button ontouchend="window.plugins.deviceFeedback.haptic(window.plugins.deviceFeedback.KEYBOARD_TAP)">Vibrate as keyboard tap</button>
+	</p>
+	<h3>Find out if haptic and acoustic feedback are enabled</h3>
+	<p>
+		If you don't feel anything and don't hear anything, probably feedback is disabled on device. Check it!<br>
+		<button ontouchend="window.plugins.deviceFeedback.isFeedbackEnabled(isFeedbackEnabledCallback)">Is feedback enabled by user?</button><br>
+		Simulation of situation, where feedback is needed. Perform vibration if sound is disabled.<br>
+		<button ontouchend="performFeedback()">Perform feedback</button>
+	</p>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="2XPWNZRYWARX4">
+	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+	<h3>Vibration rectangle</h3>
+	Move your finger over, but carefully to prevent damage vibrator
+	<div id="vibration-rectangle" ontouchmove="event.preventDefault(); window.plugins.deviceFeedback.haptic(); return false">
+	</div>
+
+<!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="rjfun.mobile@gmail.com">
+<input type="hidden" name="lc" value="GB">
+<input type="hidden" name="item_name" value="cordova-plugin-admob">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+<img alt="" border="0" src="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" width="1" height="1">
+</form>-->
+    
+</body>
+</html>
