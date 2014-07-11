@@ -4,8 +4,10 @@ Device Feedback Cordova plugin for Android, at this moment, is __unique plugin__
 
 Tested with Cordova 3.5 CLI (should work with all Cordova 3.* versions and maybe with previous versions with use of CLI) and real Android 2.3, 4.0 and 4.1 devices. Infos about compability with other versions of Cordova or Android are welcome.
 
-If You interested by this plugin, You can donate development.
+If You interested by this plugin, You can donate development.  
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2XPWNZRYWARX4) Thank You!
+
+![counter](http://toplist.cz/count.asp?id=1634566&logo=btn)
 
 Skip to [documentation](#documentation) or [installation](#installation).
 ## Introduction ##
@@ -18,7 +20,7 @@ If developer wants his application to provide native feedback for best user expe
  * Use link (`<a>`).
 
 These are all clever workarounds. But __why to use workarounds__, when you can __apply this plugin__, and __do not use workarounds__ (read on)? Well, I have not told yet, that this workarounds doesn't function each time. It is because Android webView is inconsistent across Android versions.
-On GigerBread click-sound feedback fires everytime you tap webView. It doesn't matter If you tap `<button>` or element with `onclick` listener. It is fire also If you tap nothing – transparent space inside webView. This is not a very good feedback. In a fact, it is a very bad feedback, maybe more rather anti-feedback. Real feedback fire just in case you tap a tappable element.
+On GigerBread click-sound feedback fires everytime you tap webView. It doesn't matter If you tap `<button>` or element with `onclick` listener. It is fire also If you tap nothing â€“ transparent space inside webView. This is not a very good feedback. In a fact, it is a very bad feedback, maybe more rather anti-feedback. Real feedback fire just in case you tap a tappable element.
 Acoustics feedback works quite good in ICS, but does not work at all in Jelly Bean 4.1.
 You cannot rely on this webView behaviour if you wanna user with good user experience.
 #### Solution ####
@@ -41,9 +43,9 @@ Provide native sound feedback, no arguments, no callbacks.
 Provide native haptic feedback, no callbacks.
 Three types (constants are in deviceFeedback object):
 
- * VIRTUAL_KEY – default; all SW and sensoric buttons; typically longer/stronger
- * LONG_PRESS – long tap on SW, sensoric and also HW (usually menu or back button); typically shorter/softer
- * KEYBOARD_TAP – tap on virtual keyboard
+ * VIRTUAL_KEY â€“ default; all SW and sensoric buttons; typically longer/stronger
+ * LONG_PRESS â€“ long tap on SW, sensoric and also HW (usually menu or back button); typically shorter/softer
+ * KEYBOARD_TAP â€“ tap on virtual keyboard
 
 You should respect purpose of these constants to provide best UX.
 
@@ -63,7 +65,7 @@ Check if haptic and acoustic feedback is enabled by user settings.
 		else alert("Neither haptic feedback is enabled nor acoustic.")
 	})
 ### More examples in demonstration ###
-Look at `test.html` or replace `index.html` of blank cordova project with `test.html` to simply test it.
+Look at `test.html` or replace `index.html` in www directory of blank cordova project with `test.html` to simply test it.  
 ![demonstration](demo1.png) ![demonstration](demo2.png)
 
 ## Installation ##
@@ -80,9 +82,9 @@ Type this commands into shell:
     cd DFdemo
     cordova platform add android
     cordova plugin add https://github.com/VVelda/device-feedback
-    rmdir www
+    rm -r www
     mkdir www
-    copy plugins/cz.Velda.cordova.plugin.devicefeedback/test.html www/
+    cp plugins/cz.Velda.cordova.plugin.devicefeedback/test.html www/index.html
     cordova build
     # now, you can import project into eclipse or run command below
     cordova run
