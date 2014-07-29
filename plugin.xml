@@ -2,10 +2,10 @@
 <plugin id="cz.Velda.cordova.plugin.devicefeedback" version="0.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	
 	<name>DeviceFeedback</name>
-	<description>Plugin provides a way for haptic and acoustic feedback to the user.</description>
+	<description>Plugin provides a way for haptic and acoustic feedback (native alike) to the user.</description>
 	<author>Jan Velecký</author>
 	<license>Simplified BSD License</license>
-	<keywords>feedback,haptic,acoustic,aural,tactile,sound,vibrate,key,button</keywords>
+	<keywords>feedback,haptic,acoustic,aural,tactile,sound,vibrate,key,button,touch,tap,vibration,vibrating,ux,user-experience</keywords>
 
 	<engines>
 	    <engine name="cordova" version=">=3.0" />
