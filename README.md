@@ -70,7 +70,10 @@ Look at `test.html` or replace `index.html` in www directory of blank cordova pr
 ---------------------------
 Install this plugin using Cordova CLI [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface).
 
-    cordova plugin add https://github.com/VVelda/device-feedback
+    cordova plugin add cz.velda.cordova.plugin.devicefeedback
+or  
+
+	cordova plugin add https://github.com/VVelda/device-feedback
 
 ## Creating a demo project ##
 ------------------------------------------------
