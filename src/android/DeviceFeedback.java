@@ -16,6 +16,12 @@ import android.view.SoundEffectConstants;
 import android.provider.Settings;
 import android.view.View;
 
+import java.lang.Boolean;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 /**
  * This class echoes a string called from JavaScript.
  */
@@ -33,7 +39,20 @@ public class DeviceFeedback extends CordovaPlugin {
         //Log.w("DF", "init");
         super.initialize(cordova, webView);
         // this disable default webView sound on touch and click events; does not influence dialogs or other activities
-        //webView.setSoundEffectsEnabled(false);
+        // We use this tricky way with reflcetion, since in crosswalk implementation of web-view has no setSoundEffectsEnabled
+        // method
+        try {
+            Method setSoundEffectsEnabledMethod = CordovaWebView.class.getMethod("setSoundEffectsEnabled", new Class[]{boolean.class});
+            if (setSoundEffectsEnabledMethod != null) {
+                setSoundEffectsEnabledMethod.invoke(webView, Boolean.valueOf(false));
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
