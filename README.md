@@ -78,7 +78,7 @@ or
 ### Crosswalk version ###
 Crosswalk isn't truly compatible with Cordova plugins, so I have made branch for Crosswalk users.
 
-	https://github.com/VVelda/device-feedback/#crosswalk
+	cordova plugin add https://github.com/VVelda/device-feedback/#crosswalk
 
 ## Creating a demo project ##
 ------------------------------------------------
