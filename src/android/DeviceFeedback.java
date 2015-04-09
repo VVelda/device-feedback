@@ -14,67 +14,89 @@ import android.media.AudioManager;
 //import android.util.Log;
 import android.view.SoundEffectConstants;
 import android.provider.Settings;
+import android.view.View;
+
+import java.lang.Boolean;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * This class echoes a string called from JavaScript.
  */
 public class DeviceFeedback extends CordovaPlugin {
-	AudioManager audioManager;
-	
-	// input values
-	final static int VIBRATE_TYPE_INDEX = 0;
-	
-	@Override
-	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-    	audioManager = (AudioManager) cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
-    	//Log.w("DF", "init");
-    	super.initialize(cordova, webView);
-    	// this disable default webView sound on touch and click events; does not influence dialogs or other activities
-    	webView.setSoundEffectsEnabled(false);
-	}
+    AudioManager audioManager;
+    View view;
+
+    // input values
+    final static int VIBRATE_TYPE_INDEX = 0;
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        audioManager = (AudioManager) cordova.getActivity().getSystemService(Context.AUDIO_SERVICE);
+        view = cordova.getActivity().getWindow().getDecorView().getRootView();
+        //Log.w("DF", "init");
+        super.initialize(cordova, webView);
+        // this disable default webView sound on touch and click events; does not influence dialogs or other activities
+        // We use this tricky way with reflcetion, since in crosswalk implementation of web-view has no setSoundEffectsEnabled
+        // method
+        try {
+            Method setSoundEffectsEnabledMethod = CordovaWebView.class.getMethod("setSoundEffectsEnabled", new Class[]{boolean.class});
+            if (setSoundEffectsEnabledMethod != null) {
+                setSoundEffectsEnabledMethod.invoke(webView, Boolean.valueOf(false));
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("Sound")) {
-        	Sound();
+            Sound();
         } else if (action.equals("Vibrate")) {
-        	Vibrate(args);
+            Vibrate(args);
         } else if (action.equals("isFeedbackEnabled")) {
-        	isFeedbackEnabled(callbackContext);
+            isFeedbackEnabled(callbackContext);
         } else {
             return false;
         }
         return true;
     }
 
-	void Sound() {
+    void Sound() {
         audioManager.playSoundEffect(SoundEffectConstants.CLICK);
-	}
-	
-	void Vibrate(JSONArray args) {
-		try {
-			webView.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	void isFeedbackEnabled(CallbackContext callbackContext) {
-		ContentResolver cr = cordova.getActivity().getContentResolver();
+    }
 
-		// check if is feedback allowed by user, 1 mean allowed, 0 mean disabled and -1 mean unspecified
-		int haptic = Settings.System.getInt(cr, Settings.System.HAPTIC_FEEDBACK_ENABLED, -1);
-		int acoustic = Settings.System.getInt(cr, Settings.System.SOUND_EFFECTS_ENABLED, -1);
-		
-		// map 1 to true, 0 to false and -1 to null
-		JSONObject respond = new JSONObject();
-		try {
-			respond.put("haptic", haptic == -1 ? null : haptic == 1);
-			respond.put("acoustic", acoustic == -1 ? null : acoustic == 1);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		callbackContext.success(respond);
-	}
+    void Vibrate(JSONArray args) {
+        try {
+            view.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void isFeedbackEnabled(CallbackContext callbackContext) {
+        ContentResolver cr = cordova.getActivity().getContentResolver();
+
+        // check if is feedback allowed by user, 1 mean allowed, 0 mean disabled and -1 mean unspecified
+        int haptic = Settings.System.getInt(cr, Settings.System.HAPTIC_FEEDBACK_ENABLED, -1);
+        int acoustic = Settings.System.getInt(cr, Settings.System.SOUND_EFFECTS_ENABLED, -1);
+
+        // map 1 to true, 0 to false and -1 to null
+        JSONObject respond = new JSONObject();
+        try {
+            respond.put("haptic", haptic == -1 ? null : haptic == 1);
+            respond.put("acoustic", acoustic == -1 ? null : acoustic == 1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        callbackContext.success(respond);
+    }
 }
