@@ -30,7 +30,7 @@ public class DeviceFeedback extends CordovaPlugin {
     	//Log.w("DF", "init");
     	super.initialize(cordova, webView);
     	// this disable default webView sound on touch and click events; does not influence dialogs or other activities
-    	webView.setSoundEffectsEnabled(false);
+    	webView.getView().setSoundEffectsEnabled(false);
 	}
 
     @Override
@@ -53,7 +53,7 @@ public class DeviceFeedback extends CordovaPlugin {
 	
 	void Vibrate(JSONArray args) {
 		try {
-			webView.performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
+			webView.getView().performHapticFeedback(args.getInt(VIBRATE_TYPE_INDEX));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
