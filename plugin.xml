@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cz.Velda.cordova.plugin.devicefeedback" version="0.0.2-test" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-velda-devicefeedback" version="0.0.2" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	
 	<name>DeviceFeedback</name>
 	<description>Plugin provides a way for haptic and acoustic feedback (native alike) to the user.</description>

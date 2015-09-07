@@ -2,7 +2,7 @@
 -------------------------
 Device Feedback Cordova plugin for Android, at this moment, is __unique plugin__, which provide native non-visual (haptic and acoustic) feedback to user and give user on every Android __feel__ that he is using __native application__.
 
-Works with Cordova 3.x CLI. Tested on real Android 2.3, 4.0 and 4.1 devices.
+Works with Cordova 4–5.x CLI versions, but also backward compatible with 3.x. Tested on real Android 2.3, 4.0 and 4.1 devices and various other versions on emulator. Crosswalk is supported.
 
 If You interested by this plugin, You can donate development.  
 [![donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2XPWNZRYWARX4) Thank You!
@@ -70,15 +70,15 @@ Look at `test.html` or replace `index.html` in www directory of blank cordova pr
 ---------------------------
 Install this plugin using Cordova CLI [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface).
 
-    cordova plugin add cz.velda.cordova.plugin.devicefeedback
-or  
+CLI 5.0 and higher
+
+    cordova plugin add cordova-plugin-velda-devicefeedback
+or lower versions of CLI
+
+	cordova plugin add cz.velda.cordova.plugin.devicefeedback
+or
 
 	cordova plugin add https://github.com/VVelda/device-feedback
-
-### Crosswalk version ###
-Crosswalk isn't truly compatible with Cordova plugins, so I have made branch for Crosswalk users.
-
-	cordova plugin add https://github.com/VVelda/device-feedback/#crosswalk
 
 ## Creating a demo project ##
 ------------------------------------------------
@@ -90,7 +90,7 @@ Type this commands into shell:
     cordova plugin add https://github.com/VVelda/device-feedback
     rm -r www
     mkdir www
-    cp plugins/cz.Velda.cordova.plugin.devicefeedback/test.html www/index.html
+    cp plugins/cordova-plugin-velda-devicefeedback/test.html www/index.html
     cordova build
     # now, you can import project into eclipse or run command below
     cordova run

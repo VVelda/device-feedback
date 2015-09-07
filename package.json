@@ -1,0 +1,46 @@
+{
+  "name": "cordova-plugin-velda-devicefeedback",
+  "version": "0.0.2",
+  "description": "Plugin provides a way for haptic and acoustic feedback (native alike) to the user.",
+  "cordova": {
+    "id": "cordova-plugin-velda-devicefeedback",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VVelda/device-feedback"
+  },
+  "keywords": [
+    "feedback",
+    "haptic",
+    "acoustic",
+    "aural",
+    "tactile",
+    "sound",
+    "vibrate",
+    "key",
+    "button",
+    "touch",
+    "tap",
+    "vibration",
+    "vibrating",
+    "ux",
+    "user-experience",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0"
+    }
+  ],
+  "author": "Jan Velecký",
+  "license": "Simplified BSD License",
+  "bugs": {
+    "url": "https://github.com/VVelda/device-feedback/issues"
+  },
+  "homepage": "https://github.com/VVelda/device-feedback"
+}
