@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-velda-devicefeedback",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Plugin provides a way for haptic and acoustic feedback (native alike) to the user.",
   "cordova": {
     "id": "cordova-plugin-velda-devicefeedback",
